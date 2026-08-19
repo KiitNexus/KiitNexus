@@ -217,7 +217,7 @@ function Navbar() {
         </Link>
 
         {/* LINKS */}
-        <div className="flex items-center gap-1 bg-black/50 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-xl shadow-2xl">
+        <div className="flex items-center gap-1 bg-black/50 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-sm shadow-2xl">
           {links.map((link) =>
             link.isRoute ? (
               <Link
@@ -269,7 +269,7 @@ function Navbar() {
       </motion.nav>
 
       {/* MOBILE NAV */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-black/90 backdrop-blur-xl border-b border-white/5 shadow-xl">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-black/90 backdrop-blur-sm border-b border-white/5 shadow-xl">
         <Link
           href="/"
           className="flex items-center gap-2"
@@ -313,7 +313,7 @@ function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed top-14 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-b border-[#FFC20E]/20 overflow-hidden flex flex-col items-center py-8 gap-6 shadow-2xl"
+            className="md:hidden fixed top-14 left-0 right-0 z-40 bg-black/95 backdrop-blur-sm border-b border-[#FFC20E]/20 overflow-hidden flex flex-col items-center py-8 gap-6 shadow-2xl"
           >
             {links.map((l) =>
               l.isRoute ? (
@@ -850,7 +850,7 @@ function Projects() {
             transition={{ delay: index * 0.1, duration: 0.8 }}
             viewport={{ once: true }}
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            className={`group relative p-6 md:p-8 border transition-all duration-500 overflow-hidden flex flex-col rounded-2xl backdrop-blur-xl
+            className={`group relative p-6 md:p-8 border transition-all duration-500 overflow-hidden flex flex-col rounded-2xl backdrop-blur-sm
               ${project.isFeatured
                 ? 'bg-[#FFC20E]/8 border-[#FFC20E]/30 hover:border-[#FFC20E]/70'
                 : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/10'

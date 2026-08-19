@@ -17,6 +17,10 @@ const IMAGES = {
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407146/SHIVAM_TECHNICAL_HEAD_tvgbiu.png',
   techHead3:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771709339/bf85c5b0-e7ef-4f03-a3a3-441c5bddfeea.png',
+  nontechHead1:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763333/Screenshot_2026-08-15_082922_srjrpa.png',
+  nontechHead2:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1787133063/Screenshot_2026-08-19_151945_luw0cn.png',
   webLead:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407139/CHANDAN_KUMAR_LEAD_WEB_DEV_uzuvtu.png',
   androidLead:
@@ -32,7 +36,9 @@ const IMAGES = {
   marketingLead:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771408453/IPSIT_DAS_LEAD_MARKETING_mpoklh.png',
   opsLead:
-    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771408451/ARYAN_KUMAR_LEAD_OPERATIONS_obmshf.png',
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763332/Screenshot_2026-08-15_083711_zvh9wn.png',
+  contentLead:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1786762676/1ee44d1e-92b1-411c-9dc5-a11782ef4477.png',
   member1:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1772684284/Screenshot_2026-03-05_094727_o2jdwo.png',
   member2:
@@ -49,12 +55,18 @@ const IMAGES = {
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1778055531/409536f4-94ae-445d-bc8d-4226da1d4608.png',
   member8:
     'https://res.cloudinary.com/dejfuiizz/image/upload/v1778032744/astha_kashyap_f99kuh.png',
-  member10:
-    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1778055945/d37efd9d-d418-4fdc-a776-0aa64f1a4801.png',
   member11:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1780556222/a1916b60-560f-465e-a324-425b28b47810.png',
   member12:
-  'https://res.cloudinary.com/da9zvp0mu/image/upload/v1780501632/9e962368-d92b-47a4-87f8-f8a5205b898e.png',
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1780501632/9e962368-d92b-47a4-87f8-f8a5205b898e.png',
+  member13:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1786762499/ff313a8d-e277-4a44-95d2-fea8bf5ca6b5.png',
+  member14:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763332/Screenshot_2026-08-15_082956_ngmbjd.png',
+  member15:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1787133063/Screenshot_2026-08-19_151835_tomhpp.png',
+  member16:
+    'https://res.cloudinary.com/da9zvp0mu/image/upload/v1787133313/9c3ab54d-cbe8-4727-bbce-3c128a7af4b4.png',
 }
 
 const founders = [
@@ -115,6 +127,26 @@ const techHeads = [
   },
 ]
 
+const nontechHeads = [
+  {
+    name: 'Asutosh Divyajyoti',
+    role: 'Non-Technical Head',
+    img: IMAGES.nontechHead1,
+    linkedin: 'https://www.linkedin.com/in/asutosh-divyajyoti-317241332?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    github: '#',
+    mail: 'sutoshprince11@gmail.com',
+    instagram: 'https://www.instagram.com/_.prriinnccee._?igsh=MnQyNzE2cHdrZnJv&utm_source=qr',
+  },
+  {
+    name: 'Farhan Khan',
+    role: 'Non-Technical Head',
+    img: IMAGES.nontechHead2,
+    linkedin: 'https://www.linkedin.com/in/farhan-khan-145982369?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+    github: '#',
+    mail: 'farhankhan200631@gmail.com',
+    instagram: 'https://www.instagram.com/frhn.x31?igsh=NjN1ajVyOGxtMjJs&igsi=NjN1ajVyOGxtMjJs',
+  },
+]
 const techLeads = [
   {
     name: 'Chandan Kumar',
@@ -189,14 +221,23 @@ const nonTechLeads = [
     instagram: '#',
   },
   {
-    name: 'Aryan Kumar',
+    name: 'Sampat Rashmi Patro',
     role: 'Operations',
     img: IMAGES.opsLead,
     linkedin:
-      'https://www.linkedin.com/in/aryan-kumar-687886322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-    github: 'https://github.com/Aryan05-06',
-    mail: 'aryankumar10a.jssp@gmail.com',
-    instagram: 'https://www.instagram.com/the.aryan.kr?igsh=dTFseTJkNHZhNmdw',
+      'https://www.linkedin.com/in/sampat-rashmi-patro-92007329a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    github: '#',
+    mail: 'sampatpatro@gmail.com',
+    instagram: 'https://www.instagram.com/sampat.verse?igsh=MTR5OWZzY3YzbWc4MQ==',
+  },
+  {
+    name: 'Shreyas Sankalp Sahu',
+    role: 'Content',
+    img: IMAGES.contentLead,
+    linkedin: 'linkedin.com/in/shreyas-sankalp-sahu-24b960308',
+    github: 'github.com/Shreyas-SS-07',
+    mail: 'salss.07.2006@gmail.com',
+    instagram: 'https://www.instagram.com/salss_07_?igsh=OWxvbjEwOGtib3M5',
   },
 ]
 
@@ -282,16 +323,6 @@ const members = [
     instagram: '#',
   },
   {
-    name: 'Shruti Jha',
-    role: 'Flutter Development',
-    img: IMAGES.member10,
-    linkedin: '#',
-    github: 'https://github.com/shruti01221',
-    mail: 'jhashruti0110@gmail.com',
-    instagram:
-      'https://www.instagram.com/shruti__jha007?igsh=MXMydzJwbzV4M2hibQ==',
-  },
-  {
     name: 'Ahna Sachdev',
     role: 'Web Development',
     img: IMAGES.member11,
@@ -308,6 +339,42 @@ const members = [
     github: 'https://github.com/gungunraj19-collab',
     mail: '2405279@kiit.ac.in',
     instagram: 'https://www.instagram.com/gungun_raj_19?igsh=MTN5aHNidGc1NTYzbA%3D%3D&utm_source=qr',
+  },
+  {
+    name: 'Anwesha Tripathy',
+    role: 'Broadcasting',
+    img: IMAGES.member13,
+    linkedin: 'https://www.linkedin.com/in/sai-anwesha-tripathy-268137335?',
+    github: '#',
+    mail: 'tripathyanwesha26@gmail.com',
+    instagram: 'https://www.instagram.com/_anweee_?igsh=amh6dzU5eTNjdGJ4&utm_source=qr',
+  },
+  {
+    name: 'Akshat Aryan',
+    role: 'Broadcasting',
+    img: IMAGES.member14,
+    linkedin: 'https://www.linkedin.com/in/akshat-aryan-?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    github: '#',
+    mail: 'akshataryanp@gmail.com ',
+    instagram: 'https://www.instagram.com/akxh.t_?igsh=OW1ucnFnOGNwZmlj',
+  },
+  {
+    name: 'Abhishek Kumar',
+    role: 'Broadcasting',
+    img: IMAGES.member15,
+    linkedin: 'https://www.linkedin.com/in/abhishek-kumar-400012322?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    github: '#',
+    mail: 'abhishek24005@gmail.com',
+    instagram: 'https://www.instagram.com/abhishek_24r?igsh=MXN2azVkMGVubXBlNQ==',
+  },
+  {
+    name: 'Manik Pandey ',
+    role: 'Machine Learning',
+    img: IMAGES.member16,
+    linkedin: 'https://www.linkedin.com/in/manik-pandey-208a8730a',
+    github: 'https://github.com/Manik586',
+    mail: '24158060@kiit.ac.in',
+    instagram: '#',
   },
 ]
 
@@ -335,8 +402,11 @@ const allPortraits = [
   IMAGES.member7,
   IMAGES.member11,
   IMAGES.member8,
-  IMAGES.member10,
   IMAGES.member12,
+  IMAGES.member13,
+  IMAGES.member14,
+  IMAGES.member15,
+  IMAGES.member16,
 ]
 
 function safeTarget(href?: string) {
@@ -738,12 +808,106 @@ export default function Members({
           </motion.div>
         </div>
 
+        {/* ==================== KIIT NEXUS FIC ==================== */}
+        <div className="max-w-7xl mx-auto px-4 md:px-16 w-full mt-10 mb-10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px w-8 bg-[#FFC20E]" />
+            <span
+              className="text-[#FFC20E] text-lg font-bold tracking-[0.3em] uppercase"
+              style={{ fontFamily: 'monospace' }}
+            >
+              Faculty Incharge - KIIT NEXUS
+            </span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-6">
+
+            {/* ── FIC Card 1 ── */}
+            <div
+              className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md hover:border-[#FFC20E]/50 transition-all duration-300 flex flex-col"
+              style={{ width: 180 }}
+            >
+              <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '3/4' }}>
+                <img
+                  src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763332/Screenshot_2026-08-15_083155_xlvqag.png"
+                  alt="Prof. Sourav Kumar Giri"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+              </div>
+              <div className="p-3 text-center flex flex-col flex-grow justify-center bg-black/60">
+                <h3 className="font-semibold text-white text-sm leading-tight">
+                  Prof. Sourav Kumar Giri
+                </h3>
+                <p className="mt-1 text-[#FFC20E] text-[10px] uppercase tracking-widest">
+                  Assistant Professor
+                </p>
+              </div>
+            </div>
+
+            {/* ── FIC Card 2 ── */}
+            <div
+              className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md hover:border-[#FFC20E]/50 transition-all duration-300 flex flex-col"
+              style={{ width: 180 }}
+            >
+              <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '3/4' }}>
+                <img
+                  src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763333/Screenshot_2026-08-15_083331_qtiwol.png"
+                  alt="Dr. Monideepa Roy"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+              </div>
+              <div className="p-3 text-center flex flex-col flex-grow justify-center bg-black/60">
+                <h3 className="font-semibold text-white text-sm leading-tight">
+                  Dr. Monideepa Roy
+                </h3>
+                <p className="mt-1 text-[#FFC20E] text-[10px] uppercase tracking-widest">
+                  Associate Professor
+                </p>
+              </div>
+            </div>
+
+            {/* ── FIC Card 3 ── */}
+            <div
+              className="relative group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md hover:border-[#FFC20E]/50 transition-all duration-300 flex flex-col"
+              style={{ width: 180 }}
+            >
+              <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '3/4' }}>
+                <img
+                  src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1786763332/Screenshot_2026-08-15_083228_b6mo43.png"
+                  alt="Dr. Sujoy Datta"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+              </div>
+              <div className="p-3 text-center flex flex-col flex-grow justify-center bg-black/60">
+                <h3 className="font-semibold text-white text-sm leading-tight">
+                  Dr. Sujoy Datta
+                </h3>
+                <p className="mt-1 text-[#FFC20E] text-[10px] uppercase tracking-widest">
+                  Assistant Professor
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {/* ==================== END KIIT NEXUS FIC ==================== */}
+
         <HeroStrip />
       </div>
 
       {/* ── MAIN CONTENT ── */}
       <div className="max-w-7xl mx-auto px-4 md:px-16 w-full pb-32 flex flex-col items-center">
-        
+
         {/* ── FOUNDERS ── */}
         <div className="w-full mb-12">
           <SectionLabel>Leadership</SectionLabel>
@@ -789,6 +953,15 @@ export default function Members({
                   ))}
                 </div>
               </div>
+              {/* ── NON-TECHNICAL HEADS ── */}
+              <div className="w-full mb-20">
+                <SectionLabel>Non-Technical Heads</SectionLabel>
+                <div className="flex flex-wrap justify-center gap-6">
+                  {nontechHeads.map((h, i) => (
+                    <MemberCard key={i} {...h} delay={i * 0.1} />
+                  ))}
+                </div>
+              </div>
 
               {/* ── DOMAIN FILTER TABS ── */}
               <div className="w-full mb-12">
@@ -804,11 +977,10 @@ export default function Members({
                       <button
                         key={tab.key}
                         onClick={() => setDomainFilter(tab.key)}
-                        className={`relative px-5 py-2 text-xs font-bold tracking-widest uppercase rounded-full transition-all duration-300 ${
-                          domainFilter === tab.key
-                            ? 'text-black bg-[#FFC20E] shadow-[0_0_20px_rgba(255,194,14,0.3)]'
-                            : 'text-gray-400 hover:text-white'
-                        }`}
+                        className={`relative px-5 py-2 text-xs font-bold tracking-widest uppercase rounded-full transition-all duration-300 ${domainFilter === tab.key
+                          ? 'text-black bg-[#FFC20E] shadow-[0_0_20px_rgba(255,194,14,0.3)]'
+                          : 'text-gray-400 hover:text-white'
+                          }`}
                         style={{ fontFamily: 'monospace' }}
                       >
                         {tab.label}

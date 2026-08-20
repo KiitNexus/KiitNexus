@@ -1,640 +1,9 @@
-// 'use client'
-
-// import { useState, useRef, useEffect } from 'react'
-
-// // ── Types ──────────────────────────────────────────────────────────────────
-// interface Message {
-//   id: string
-//   role: 'bot' | 'user'
-//   text: string
-//   time: string
-// }
-
-// // ── Helpers ────────────────────────────────────────────────────────────────
-// function getTime(): string {
-//   return new Date().toLocaleTimeString('en-US', {
-//     hour: '2-digit',
-//     minute: '2-digit',
-//     hour12: true,
-//   })
-// }
-
-// const QUICK_REPLIES = [
-//   'Join Nexus',
-//   'View Projects',
-//   'Meet the Team',
-//   'Contact',
-// ]
-
-// const INITIAL_MESSAGES: Message[] = [
-//   {
-//     id: '1',
-//     role: 'bot',
-//     text: "Hey there 👋 I'm NexBot, your KIIT Nexus assistant! How can I help you today?",
-//     time: getTime(),
-//   },
-// ]
-
-// function getBotReply(input: string): string {
-//   const lower = input.toLowerCase()
-//   if (lower.includes('join') || lower.includes('nexus'))
-//     return "🚀 We're always looking for passionate builders! Fill out the interest form or DM us on Instagram @kiit.nexus to get started."
-//   if (lower.includes('project'))
-//     return '🛠 Check out our Projects section — KIIT Quest is live, and Campus Connect + AI Resume Scanner are in progress!'
-//   if (lower.includes('team') || lower.includes('member'))
-//     return '👥 Scroll down to the Members section to meet the awesome people behind Nexus!'
-//   if (lower.includes('contact'))
-//     return '📬 Reach us at kiit.nexus@example.com or DM us on Instagram @kiit.nexus. We usually reply within 24 hours!'
-//   return "That's a great question! Our full ML-powered bot is coming soon. For now, try the quick reply buttons or contact us directly! 😊"
-// }
-
-// // ── Bot Widget ─────────────────────────────────────────────────────────────
-// export default function Bot() {
-//   const [open, setOpen] = useState(false)
-//   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES)
-//   const [input, setInput] = useState('')
-//   const [typing, setTyping] = useState(false)
-//   const [showBadge, setShowBadge] = useState(true)
-//   const [quickRepliesUsed, setQuickRepliesUsed] = useState(false)
-//   const [hovered, setHovered] = useState(false)
-//   const messagesEndRef = useRef<HTMLDivElement>(null)
-//   const inputRef = useRef<HTMLInputElement>(null)
-
-//   useEffect(() => {
-//     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-//   }, [messages, typing])
-
-//   useEffect(() => {
-//     if (open) {
-//       setTimeout(() => inputRef.current?.focus(), 300)
-//       setShowBadge(false)
-//     }
-//   }, [open])
-
-//   const sendMessage = (text: string) => {
-//     if (!text.trim()) return
-//     setQuickRepliesUsed(true)
-//     const userMsg: Message = {
-//       id: Date.now().toString(),
-//       role: 'user',
-//       text: text.trim(),
-//       time: getTime(),
-//     }
-//     setMessages((prev) => [...prev, userMsg])
-//     setInput('')
-//     setTyping(true)
-//     setTimeout(() => {
-//       setTyping(false)
-//       const botMsg: Message = {
-//         id: (Date.now() + 1).toString(),
-//         role: 'bot',
-//         text: getBotReply(text.trim()),
-//         time: getTime(),
-//       }
-//       setMessages((prev) => [...prev, botMsg])
-//     }, 1400)
-//   }
-
-//   return (
-//     <>
-//       {/* ── Keyframes injected once ── */}
-//       <style>{`
-//         @keyframes _bot_pulse {
-//           0%  { box-shadow: 0 0 0 0   rgba(255,194,14,0.5); }
-//           70% { box-shadow: 0 0 0 14px rgba(255,194,14,0);  }
-//           100%{ box-shadow: 0 0 0 0   rgba(255,194,14,0);  }
-//         }
-//         @keyframes _bot_slideIn {
-//           from { opacity:0; transform:scale(0.88) translateY(20px); }
-//           to   { opacity:1; transform:scale(1)    translateY(0);    }
-//         }
-//         @keyframes _msg_in {
-//           from { opacity:0; transform:translateY(8px); }
-//           to   { opacity:1; transform:translateY(0);   }
-//         }
-//         @keyframes _dot {
-//           0%,60%,100%{ transform:translateY(0);   opacity:0.4; }
-//           30%         { transform:translateY(-5px); opacity:1;   }
-//         }
-//         @keyframes _blink {
-//           0%,100%{ opacity:1;   }
-//           50%    { opacity:0.3; }
-//         }
-//         @keyframes _badgePop {
-//           from{ transform:scale(0); }
-//           to  { transform:scale(1); }
-//         }
-//         ._bot_win   { animation: _bot_slideIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards; }
-//         ._bot_pulse { animation: _bot_pulse 2.4s ease-in-out infinite; }
-//         ._msg_in    { animation: _msg_in 0.3s cubic-bezier(0.16,1,0.3,1) forwards; }
-//         ._dot1      { animation: _dot 1.2s ease-in-out infinite;       }
-//         ._dot2      { animation: _dot 1.2s ease-in-out 0.2s infinite;  }
-//         ._dot3      { animation: _dot 1.2s ease-in-out 0.4s infinite;  }
-//         ._blink     { animation: _blink 1.6s ease-in-out infinite;     }
-//         ._badge     { animation: _badgePop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-//         ._qr:hover  { background:#FFC20E !important; color:#000 !important; }
-//         ._inp:focus { border-color:rgba(255,194,14,0.35) !important;
-//                       background:rgba(255,255,255,0.07) !important; }
-//         ._send:hover:not(:disabled){ transform:scale(1.1);
-//                                      box-shadow:0 0 16px rgba(255,194,14,0.4); }
-//         ._send:disabled{ opacity:0.4; cursor:default; }
-//         ._scrollbar{ scrollbar-width:thin; scrollbar-color:rgba(255,194,14,0.15) transparent; }
-//         ._scrollbar::-webkit-scrollbar{ width:4px; }
-//         ._scrollbar::-webkit-scrollbar-thumb{ background:rgba(255,194,14,0.2); border-radius:4px; }
-//         @media(max-width:480px){
-//           ._bot_win{
-//             right:0 !important; bottom:0 !important;
-//             width:100vw !important; max-height:70vh !important;
-//             border-radius:18px 18px 0 0 !important;
-//           }
-//         }
-//       `}</style>
-
-//       {/* ── Chat Window ── */}
-//       {open && (
-//         <div
-//           className="_bot_win"
-//           style={{
-//             position: 'fixed',
-//             bottom: '96px',
-//             right: '28px',
-//             zIndex: 9998,
-//             width: '360px',
-//             maxHeight: '540px',
-//             display: 'flex',
-//             flexDirection: 'column',
-//             background: '#0a0a0a',
-//             border: '1px solid rgba(255,194,14,0.2)',
-//             borderRadius: '18px',
-//             overflow: 'hidden',
-//             boxShadow:
-//               '0 0 0 1px rgba(255,255,255,0.04),0 24px 60px rgba(0,0,0,0.7),0 0 80px rgba(255,194,14,0.06)',
-//           }}
-//         >
-//           {/* Header */}
-//           <div
-//             style={{
-//               display: 'flex',
-//               alignItems: 'center',
-//               gap: '12px',
-//               padding: '16px 18px',
-//               background:
-//                 'linear-gradient(135deg,rgba(255,194,14,0.08) 0%,transparent 100%)',
-//               borderBottom: '1px solid rgba(255,255,255,0.05)',
-//               flexShrink: 0,
-//             }}
-//           >
-//             <div
-//               style={{
-//                 width: '38px',
-//                 height: '38px',
-//                 borderRadius: '50%',
-//                 background: '#FFC20E',
-//                 display: 'flex',
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 fontSize: '18px',
-//                 flexShrink: 0,
-//               }}
-//             >
-//               🤖
-//             </div>
-//             <div style={{ flex: 1 }}>
-//               <div
-//                 style={{
-//                   fontSize: '13px',
-//                   fontWeight: 700,
-//                   color: '#fff',
-//                   letterSpacing: '0.06em',
-//                   fontFamily: 'monospace',
-//                   textTransform: 'uppercase',
-//                 }}
-//               >
-//                 NexBot
-//               </div>
-//               <div
-//                 style={{
-//                   fontSize: '10px',
-//                   color: '#22c55e',
-//                   fontFamily: 'monospace',
-//                   letterSpacing: '0.08em',
-//                   marginTop: '2px',
-//                   display: 'flex',
-//                   alignItems: 'center',
-//                   gap: '5px',
-//                 }}
-//               >
-//                 <span
-//                   className="_blink"
-//                   style={{
-//                     width: '5px',
-//                     height: '5px',
-//                     borderRadius: '50%',
-//                     background: '#22c55e',
-//                     display: 'inline-block',
-//                   }}
-//                 />
-//                 Online · KIIT Nexus
-//               </div>
-//             </div>
-//             <button
-//               onClick={() => setOpen(false)}
-//               style={{
-//                 width: '28px',
-//                 height: '28px',
-//                 borderRadius: '50%',
-//                 border: '1px solid rgba(255,255,255,0.08)',
-//                 background: 'rgba(255,255,255,0.04)',
-//                 color: 'rgba(255,255,255,0.5)',
-//                 cursor: 'pointer',
-//                 display: 'flex',
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 fontSize: '14px',
-//               }}
-//             >
-//               ✕
-//             </button>
-//           </div>
-
-//           {/* Messages */}
-//           <div
-//             className="_scrollbar"
-//             style={{
-//               flex: 1,
-//               overflowY: 'auto',
-//               padding: '18px 16px',
-//               display: 'flex',
-//               flexDirection: 'column',
-//               gap: '12px',
-//             }}
-//           >
-//             {/* Date divider */}
-//             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-//               <div
-//                 style={{
-//                   flex: 1,
-//                   height: '1px',
-//                   background: 'rgba(255,255,255,0.05)',
-//                 }}
-//               />
-//               <span
-//                 style={{
-//                   fontSize: '9px',
-//                   fontFamily: 'monospace',
-//                   color: 'rgba(255,255,255,0.15)',
-//                   letterSpacing: '0.1em',
-//                   textTransform: 'uppercase',
-//                 }}
-//               >
-//                 Today
-//               </span>
-//               <div
-//                 style={{
-//                   flex: 1,
-//                   height: '1px',
-//                   background: 'rgba(255,255,255,0.05)',
-//                 }}
-//               />
-//             </div>
-
-//             {messages.map((msg) => (
-//               <div
-//                 key={msg.id}
-//                 className="_msg_in"
-//                 style={{
-//                   display: 'flex',
-//                   gap: '8px',
-//                   flexDirection: msg.role === 'user' ? 'row-reverse' : 'row',
-//                 }}
-//               >
-//                 {msg.role === 'bot' && (
-//                   <div
-//                     style={{
-//                       width: '28px',
-//                       height: '28px',
-//                       borderRadius: '50%',
-//                       background: 'rgba(255,194,14,0.12)',
-//                       border: '1px solid rgba(255,194,14,0.2)',
-//                       display: 'flex',
-//                       alignItems: 'center',
-//                       justifyContent: 'center',
-//                       fontSize: '12px',
-//                       flexShrink: 0,
-//                       alignSelf: 'flex-end',
-//                     }}
-//                   >
-//                     🤖
-//                   </div>
-//                 )}
-//                 <div>
-//                   <div
-//                     style={{
-//                       maxWidth: '76%',
-//                       padding: '10px 13px',
-//                       borderRadius: '14px',
-//                       fontSize: '13px',
-//                       lineHeight: 1.55,
-//                       fontFamily: 'Arial,Helvetica,sans-serif',
-//                       ...(msg.role === 'bot'
-//                         ? {
-//                             background: 'rgba(255,255,255,0.05)',
-//                             border: '1px solid rgba(255,255,255,0.07)',
-//                             color: 'rgba(255,255,255,0.88)',
-//                             borderBottomLeftRadius: '4px',
-//                           }
-//                         : {
-//                             background: '#FFC20E',
-//                             color: '#000',
-//                             fontWeight: 500,
-//                             borderBottomRightRadius: '4px',
-//                           }),
-//                     }}
-//                   >
-//                     {msg.text}
-//                   </div>
-//                   <div
-//                     style={{
-//                       fontSize: '9px',
-//                       fontFamily: 'monospace',
-//                       color: 'rgba(255,255,255,0.2)',
-//                       marginTop: '4px',
-//                       textAlign: msg.role === 'user' ? 'right' : 'left',
-//                       letterSpacing: '0.05em',
-//                     }}
-//                   >
-//                     {msg.time}
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-
-//             {/* Quick replies */}
-//             {!quickRepliesUsed && !typing && (
-//               <div
-//                 style={{
-//                   display: 'flex',
-//                   flexWrap: 'wrap',
-//                   gap: '6px',
-//                   marginTop: '4px',
-//                 }}
-//               >
-//                 {QUICK_REPLIES.map((qr) => (
-//                   <button
-//                     key={qr}
-//                     className="_qr"
-//                     onClick={() => sendMessage(qr)}
-//                     style={{
-//                       padding: '5px 11px',
-//                       border: '1px solid rgba(255,194,14,0.3)',
-//                       borderRadius: '100px',
-//                       background: 'transparent',
-//                       color: '#FFC20E',
-//                       fontSize: '11px',
-//                       fontFamily: 'monospace',
-//                       letterSpacing: '0.05em',
-//                       cursor: 'pointer',
-//                       transition: 'background 0.2s,color 0.2s',
-//                       whiteSpace: 'nowrap',
-//                     }}
-//                   >
-//                     {qr}
-//                   </button>
-//                 ))}
-//               </div>
-//             )}
-
-//             {/* Typing */}
-//             {typing && (
-//               <div style={{ display: 'flex', gap: '8px' }}>
-//                 <div
-//                   style={{
-//                     width: '28px',
-//                     height: '28px',
-//                     borderRadius: '50%',
-//                     background: 'rgba(255,194,14,0.12)',
-//                     border: '1px solid rgba(255,194,14,0.2)',
-//                     display: 'flex',
-//                     alignItems: 'center',
-//                     justifyContent: 'center',
-//                     fontSize: '12px',
-//                     flexShrink: 0,
-//                     alignSelf: 'flex-end',
-//                   }}
-//                 >
-//                   🤖
-//                 </div>
-//                 <div
-//                   style={{
-//                     display: 'flex',
-//                     alignItems: 'center',
-//                     gap: '5px',
-//                     padding: '10px 13px',
-//                     background: 'rgba(255,255,255,0.05)',
-//                     border: '1px solid rgba(255,255,255,0.07)',
-//                     borderRadius: '14px',
-//                     borderBottomLeftRadius: '4px',
-//                   }}
-//                 >
-//                   <span
-//                     className="_dot1"
-//                     style={{
-//                       width: '6px',
-//                       height: '6px',
-//                       borderRadius: '50%',
-//                       background: 'rgba(255,194,14,0.6)',
-//                       display: 'inline-block',
-//                     }}
-//                   />
-//                   <span
-//                     className="_dot2"
-//                     style={{
-//                       width: '6px',
-//                       height: '6px',
-//                       borderRadius: '50%',
-//                       background: 'rgba(255,194,14,0.6)',
-//                       display: 'inline-block',
-//                     }}
-//                   />
-//                   <span
-//                     className="_dot3"
-//                     style={{
-//                       width: '6px',
-//                       height: '6px',
-//                       borderRadius: '50%',
-//                       background: 'rgba(255,194,14,0.6)',
-//                       display: 'inline-block',
-//                     }}
-//                   />
-//                 </div>
-//               </div>
-//             )}
-
-//             <div ref={messagesEndRef} />
-//           </div>
-
-//           {/* Input */}
-//           <div
-//             style={{
-//               display: 'flex',
-//               alignItems: 'center',
-//               gap: '8px',
-//               padding: '12px 14px',
-//               borderTop: '1px solid rgba(255,255,255,0.05)',
-//               background: 'rgba(0,0,0,0.3)',
-//               flexShrink: 0,
-//             }}
-//           >
-//             <input
-//               ref={inputRef}
-//               className="_inp"
-//               value={input}
-//               onChange={(e) => setInput(e.target.value)}
-//               onKeyDown={(e) => e.key === 'Enter' && sendMessage(input)}
-//               placeholder="Ask me anything..."
-//               style={{
-//                 flex: 1,
-//                 background: 'rgba(255,255,255,0.05)',
-//                 border: '1px solid rgba(255,255,255,0.08)',
-//                 borderRadius: '100px',
-//                 padding: '9px 15px',
-//                 fontSize: '13px',
-//                 fontFamily: 'Arial,Helvetica,sans-serif',
-//                 color: 'rgba(255,255,255,0.85)',
-//                 outline: 'none',
-//                 transition: 'border-color 0.2s,background 0.2s',
-//                 caretColor: '#FFC20E',
-//               }}
-//             />
-//             <button
-//               className="_send"
-//               onClick={() => sendMessage(input)}
-//               disabled={!input.trim() || typing}
-//               style={{
-//                 width: '36px',
-//                 height: '36px',
-//                 borderRadius: '50%',
-//                 background: '#FFC20E',
-//                 border: 'none',
-//                 cursor: 'pointer',
-//                 display: 'flex',
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 flexShrink: 0,
-//                 transition: 'transform 0.18s,box-shadow 0.18s',
-//               }}
-//             >
-//               <svg
-//                 viewBox="0 0 24 24"
-//                 fill="currentColor"
-//                 style={{ width: '15px', height: '15px', color: '#000' }}
-//               >
-//                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-//               </svg>
-//             </button>
-//           </div>
-
-//           {/* Footer */}
-//           <div
-//             style={{
-//               textAlign: 'center',
-//               fontSize: '9px',
-//               fontFamily: 'monospace',
-//               color: 'rgba(255,255,255,0.12)',
-//               letterSpacing: '0.12em',
-//               textTransform: 'uppercase',
-//               padding: '0 14px 10px',
-//               flexShrink: 0,
-//             }}
-//           >
-//             Powered by KIIT Nexus · ML Coming Soon
-//           </div>
-//         </div>
-//       )}
-
-//       {/* ── Trigger Button ── */}
-//       <button
-//         className={open ? undefined : '_bot_pulse'}
-//         onClick={() => setOpen((v) => !v)}
-//         onMouseEnter={() => setHovered(true)}
-//         onMouseLeave={() => setHovered(false)}
-//         aria-label="Toggle chat"
-//         style={{
-//           position: 'fixed',
-//           bottom: '28px',
-//           right: '28px',
-//           zIndex: 9999,
-//           width: '56px',
-//           height: '56px',
-//           borderRadius: '50%',
-//           background: '#FFC20E',
-//           border: 'none',
-//           cursor: 'pointer',
-//           display: 'flex',
-//           alignItems: 'center',
-//           justifyContent: 'center',
-//           transform: hovered ? 'scale(1.1)' : 'scale(1)',
-//           transition: 'transform 0.22s cubic-bezier(0.34,1.56,0.64,1)',
-//         }}
-//       >
-//         {/* Badge */}
-//         {showBadge && !open && (
-//           <span
-//             className="_badge"
-//             style={{
-//               position: 'absolute',
-//               top: '-3px',
-//               right: '-3px',
-//               width: '16px',
-//               height: '16px',
-//               borderRadius: '50%',
-//               background: '#ef4444',
-//               border: '2px solid #000',
-//               fontSize: '9px',
-//               fontWeight: 800,
-//               color: '#fff',
-//               display: 'flex',
-//               alignItems: 'center',
-//               justifyContent: 'center',
-//               fontFamily: 'monospace',
-//             }}
-//           >
-//             1
-//           </span>
-//         )}
-
-//         {open ? (
-//           <svg
-//             viewBox="0 0 24 24"
-//             fill="none"
-//             stroke="currentColor"
-//             strokeWidth={2.5}
-//             strokeLinecap="round"
-//             style={{ width: '22px', height: '22px', color: '#000' }}
-//           >
-//             <line x1="18" y1="6" x2="6" y2="18" />
-//             <line x1="6" y1="6" x2="18" y2="18" />
-//           </svg>
-//         ) : (
-//           <svg
-//             viewBox="0 0 24 24"
-//             fill="none"
-//             stroke="currentColor"
-//             strokeWidth={2}
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//             style={{ width: '24px', height: '24px', color: '#000' }}
-//           >
-//             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-//           </svg>
-//         )}
-//       </button>
-//     </>
-//   )
-// }
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+
+// ── Config ─────────────────────────────────────────────────────────────────
+const CHATBOT_API_URL = 'https://kiit-nexus-chatbot-final-2.onrender.com'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Message {
@@ -684,17 +53,40 @@ const INITIAL_MESSAGES: Message[] = [
   },
 ]
 
-function getBotReply(input: string): string {
-  const lower = input.toLowerCase()
-  if (lower.includes('join') || lower.includes('nexus'))
-    return "🚀 We're always looking for passionate builders! Fill out the interest form or DM us on Instagram @kiitnexus to get started."
-  if (lower.includes('project'))
-    return '🛠 Check out our Projects section — KIIT Quest is live, and Campus Connect + AI Resume Scanner are in progress!'
-  if (lower.includes('team') || lower.includes('member'))
-    return '👥 Scroll down to the Members section to meet the awesome people behind Nexus!'
-  if (lower.includes('contact'))
-    return '📬 Reach us at kiitnexus.in@gmail.com or DM us on Instagram @kiitnexus. We usually reply within 24 hours!'
-  return "That's a great question! Our full ML-powered bot is coming soon. For now, try the quick reply buttons or contact us directly! 😊"
+/**
+ * Calls the live KIIT Nexus Chatbot API instead of a local rule-based reply.
+ * Assumed contract: POST /chat with { message: string } → JSON containing
+ * one of "response" | "reply" | "answer" | "message" as the bot's text.
+ * If the real API differs (check /docs on the deployed service), just
+ * update the body key and the `data.response ?? ...` line below.
+ */
+async function getBotReply(input: string): Promise<string> {
+  try {
+    const res = await fetch(`${CHATBOT_API_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: input }),
+    })
+
+    if (!res.ok) {
+      throw new Error(`API responded with status ${res.status}`)
+    }
+
+    const data = await res.json()
+
+    // Try common response field names so this keeps working even if the
+    // API's exact key differs from our assumption.
+    const reply = data?.response ?? data?.reply ?? data?.answer ?? data?.message
+
+    if (typeof reply === 'string' && reply.trim()) {
+      return reply
+    }
+
+    return "Hmm, I didn't quite get a proper reply from the server. Try again in a moment! 😊"
+  } catch (err) {
+    console.error('NexBot API error:', err)
+    return "⚠️ I'm having trouble reaching the server right now (it might be waking up — first request can take up to a minute on Render's free tier). Please try again shortly!"
+  }
 }
 
 // ── Bot Widget ─────────────────────────────────────────────────────────────
@@ -708,14 +100,6 @@ export default function Bot() {
   const [hovered, setHovered] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  // Cleanup typing timer on unmount to prevent memory leaks
-  useEffect(() => {
-    return () => {
-      if (typingTimerRef.current) clearTimeout(typingTimerRef.current)
-    }
-  }, [])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -729,8 +113,8 @@ export default function Bot() {
     }
   }, [open])
 
-  // SECURITY FIX: sanitize before adding to state; prevents XSS in messages
-  const sendMessage = useCallback((raw: string) => {
+  // Calls the live API now (async), shows typing indicator while waiting.
+  const sendMessage = useCallback(async (raw: string) => {
     const text = sanitizeInput(raw)
     if (!text) return
     setQuickRepliesUsed(true)
@@ -743,16 +127,17 @@ export default function Bot() {
     setMessages((prev) => [...prev, userMsg])
     setInput('')
     setTyping(true)
-    typingTimerRef.current = setTimeout(() => {
-      setTyping(false)
-      const botMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'bot',
-        text: getBotReply(text),
-        time: getTime(),
-      }
-      setMessages((prev) => [...prev, botMsg])
-    }, 1400)
+
+    const replyText = await getBotReply(text)
+
+    setTyping(false)
+    const botMsg: Message = {
+      id: (Date.now() + 1).toString(),
+      role: 'bot',
+      text: replyText,
+      time: getTime(),
+    }
+    setMessages((prev) => [...prev, botMsg])
   }, [])
 
   return (
@@ -1194,7 +579,7 @@ export default function Bot() {
               flexShrink: 0,
             }}
           >
-            Powered by KIIT Nexus · ML Coming Soon
+            Powered by KIIT Nexus
           </div>
         </div>
       )}

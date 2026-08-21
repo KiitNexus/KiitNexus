@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# 1. If requesting the root URL, serve out/index.html internally
+RewriteRule ^$ out/index.html [L]
+
+# 2. For all other requests, if they don't start with /out/
+RewriteCond %{REQUEST_URI} !^/out/
+# And if the requested file/folder does not exist directly in the root
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Rewrite the request to serve it from the out/ folder internally
+RewriteRule ^(.*)$ out/$1 [L]

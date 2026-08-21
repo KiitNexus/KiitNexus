@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Check if the requested path is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# Check if the requested path is not a real file
+RewriteCond %{REQUEST_FILENAME} !-f
+# Check if appending .html matches a real file
+RewriteCond %{REQUEST_FILENAME}\.html -f
+# Rewrite clean URL to serve the .html file internally
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Serve custom 404.html for 404 errors
+ErrorDocument 404 /404.html

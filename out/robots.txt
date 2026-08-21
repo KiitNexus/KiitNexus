@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kiitnexus.in/sitemap.xml
+Disallow: /sitemap.xml

@@ -144,7 +144,7 @@ function Navbar() {
     { label: 'About', id: 'about', isRoute: false },
     { label: 'Projects', id: 'projects', isRoute: true },
     { label: 'Members', id: 'members', isRoute: true },
-    { label: 'Opportunities', id: 'opportunities', isRoute: false },
+    { label: 'Events', id: 'opportunities', isRoute: true },
   ]
   const activeLink = 'projects'
 
@@ -159,30 +159,49 @@ function Navbar() {
             : 'py-7 bg-transparent'
           }`}
       >
-        <Link
-          href="/"
-          className="flex items-center gap-3 group"
-        >
-          <img
-            src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
-            alt="KIIT Nexus"
-            className="h-8 lg:h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(255,194,14,0.6)]"
-          />
-          <div className="flex flex-col leading-none">
-            <span
-              className="text-[#FFC20E] font-black text-sm lg:text-base tracking-[0.2em]"
-              style={{ fontFamily: 'monospace' }}
-            >
-              KIIT
-            </span>
-            <span
-              className="text-white font-black text-sm lg:text-base tracking-[0.2em]"
-              style={{ fontFamily: 'monospace' }}
-            >
-              NEXUS
-            </span>
-          </div>
-        </Link>
+        <div className="flex items-center gap-3 group">
+          {/* Official KIIT Logo */}
+          <a
+            href="https://kiit.ac.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer hover:scale-105 transition-transform"
+          >
+            <img
+              src="/KIIT_LOGO.webp"
+              alt="KIIT University"
+              className="h-8 lg:h-10 w-auto object-contain"
+            />
+          </a>
+          
+          <div className="h-6 w-px bg-white/20" />
+
+          {/* KIIT Nexus Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-3"
+          >
+            <img
+              src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
+              alt="KIIT Nexus"
+              className="h-8 lg:h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(255,194,14,0.6)]"
+            />
+            <div className="flex flex-col leading-none">
+              <span
+                className="text-[#FFC20E] font-black text-sm lg:text-base tracking-[0.2em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                KIIT
+              </span>
+              <span
+                className="text-white font-black text-sm lg:text-base tracking-[0.2em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                NEXUS
+              </span>
+            </div>
+          </Link>
+        </div>
 
         <div className="flex items-center gap-1 bg-black/50 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-xl shadow-2xl">
           {links.map((link) =>
@@ -221,22 +240,49 @@ function Navbar() {
       </motion.nav>
 
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-black/90 backdrop-blur-xl border-b border-white/5 shadow-xl">
-        <Link
-          href="/"
-          className="flex items-center gap-2"
-        >
-          <img
-            src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
-            alt="KIIT Nexus"
-            className="h-7 w-auto object-contain"
-          />
-          <span
-            className="text-[#FFC20E] font-black text-sm tracking-[0.2em]"
-            style={{ fontFamily: 'monospace' }}
+        <div className="flex items-center gap-2">
+          {/* Official KIIT Logo Mobile */}
+          <a
+            href="https://kiit.ac.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer hover:scale-105 transition-transform"
           >
-            NEXUS
-          </span>
-        </Link>
+            <img
+              src="/KIIT_LOGO.webp"
+              alt="KIIT University"
+              className="h-7 w-auto object-contain"
+            />
+          </a>
+          
+          <div className="h-5 w-px bg-white/20" />
+
+          {/* KIIT Nexus Logo Mobile */}
+          <Link
+            href="/"
+            className="flex items-center gap-2"
+          >
+            <img
+              src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
+              alt="KIIT Nexus"
+              className="h-7 w-auto object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span
+                className="text-[#FFC20E] font-black text-[10px] tracking-[0.15em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                KIIT
+              </span>
+              <span
+                className="text-white font-black text-[10px] tracking-[0.15em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                NEXUS
+              </span>
+            </div>
+          </Link>
+        </div>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="p-2 flex flex-col gap-1.5"

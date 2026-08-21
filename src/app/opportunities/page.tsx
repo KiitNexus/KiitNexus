@@ -1,12 +1,225 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { 
   FiCode, FiDatabase, FiPenTool, FiZap, FiBox, 
   FiCalendar, FiBook, FiMessageSquare, FiUser, 
   FiClock, FiChevronRight, FiBriefcase, FiUsers, FiFileText
 } from 'react-icons/fi';
+
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const links = [
+    { label: 'About', id: 'about', isRoute: false },
+    { label: 'Projects', id: 'projects', isRoute: true },
+    { label: 'Members', id: 'members', isRoute: true },
+    { label: 'Events', id: 'opportunities', isRoute: true },
+  ]
+  const activeLink = 'opportunities'
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        className={`fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-6 lg:px-10 transition-all duration-700 ${scrolled
+            ? 'py-4 bg-black/85 backdrop-blur-2xl border-b border-[#FFC20E]/10'
+            : 'py-7 bg-transparent'
+          }`}
+      >
+        <div className="flex items-center gap-3 group">
+          {/* Official KIIT Logo */}
+          <a
+            href="https://kiit.ac.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer hover:scale-105 transition-transform"
+          >
+            <img
+              src="/KIIT_LOGO.webp"
+              alt="KIIT University"
+              className="h-8 lg:h-10 w-auto object-contain"
+            />
+          </a>
+          
+          <div className="h-6 w-px bg-white/20" />
+
+          {/* KIIT Nexus Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-3"
+          >
+            <img
+              src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
+              alt="KIIT Nexus"
+              className="h-8 lg:h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(255,194,14,0.6)]"
+            />
+            <div className="flex flex-col leading-none">
+              <span
+                className="text-[#FFC20E] font-black text-sm lg:text-base tracking-[0.2em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                KIIT
+              </span>
+              <span
+                className="text-white font-black text-sm lg:text-base tracking-[0.2em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                NEXUS
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-1 bg-black/50 border border-white/10 rounded-full px-2 py-1.5 backdrop-blur-xl shadow-2xl">
+          {links.map((link) =>
+            link.isRoute ? (
+              <Link
+                key={link.id}
+                href={`/${link.id}`}
+                className={`relative px-3 lg:px-5 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 rounded-full border ${activeLink === link.id
+                    ? 'text-[#FFC20E] bg-white/5 border-[#FFC20E]/30 shadow-[0_0_15px_rgba(255,194,14,0.15)]'
+                    : 'text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
+                  }`}
+                style={{ fontFamily: 'monospace' }}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <Link
+                key={link.id}
+                href={`/#${link.id}`}
+                className={`relative px-3 lg:px-5 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 rounded-full border text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10`}
+                style={{ fontFamily: 'monospace' }}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+        </div>
+
+        <Link
+          href="/#contact"
+          className="relative overflow-hidden group border border-[#FFC20E]/70 text-[#FFC20E] text-xs font-bold tracking-[0.2em] uppercase px-5 lg:px-7 py-2.5 rounded-sm transition-all duration-300 hover:text-black"
+          style={{ fontFamily: 'monospace' }}
+        >
+          <span className="relative z-10">Contact ↗</span>
+        </Link>
+      </motion.nav>
+
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-black/90 backdrop-blur-xl border-b border-white/5 shadow-xl">
+        <div className="flex items-center gap-2">
+          {/* Official KIIT Logo Mobile */}
+          <a
+            href="https://kiit.ac.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer hover:scale-105 transition-transform"
+          >
+            <img
+              src="/KIIT_LOGO.webp"
+              alt="KIIT University"
+              className="h-7 w-auto object-contain"
+            />
+          </a>
+          
+          <div className="h-5 w-px bg-white/20" />
+
+          {/* KIIT Nexus Logo Mobile */}
+          <Link
+            href="/"
+            className="flex items-center gap-2"
+          >
+            <img
+              src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
+              alt="KIIT Nexus"
+              className="h-7 w-auto object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span
+                className="text-[#FFC20E] font-black text-[10px] tracking-[0.15em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                KIIT
+              </span>
+              <span
+                className="text-white font-black text-[10px] tracking-[0.15em]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                NEXUS
+              </span>
+            </div>
+          </Link>
+        </div>
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="p-2 flex flex-col gap-1.5"
+          aria-label="Toggle menu"
+        >
+          <motion.span
+            animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            className="block w-5 h-px bg-white"
+          />
+          <motion.span
+            animate={
+              menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }
+            }
+            className="block w-5 h-px bg-white"
+          />
+          <motion.span
+            animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            className="block w-5 h-px bg-white"
+          />
+        </button>
+      </div>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden fixed top-14 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-b border-[#FFC20E]/20 overflow-hidden flex flex-col items-center py-8 gap-6 shadow-2xl"
+          >
+            {links.map((l) =>
+              l.isRoute ? (
+                <Link
+                  key={l.id}
+                  href={`/${l.id}`}
+                  onClick={() => setMenuOpen(false)}
+                  className={`text-xs tracking-widest uppercase transition-colors ${activeLink === l.id ? 'text-[#FFC20E]' : 'text-gray-400 hover:text-[#FFC20E]'}`}
+                  style={{ fontFamily: 'monospace' }}
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <Link
+                  key={l.id}
+                  href={`/#${l.id}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-gray-400 hover:text-[#FFC20E] text-xs tracking-widest uppercase transition-colors"
+                  style={{ fontFamily: 'monospace' }}
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
 
 // --- PARTICLE BACKGROUND COMPONENT ---
 // Exactly matches your landing page
@@ -109,12 +322,29 @@ function ParticlesBackground() {
 
 // --- MAIN PAGE COMPONENT ---
 export default function OpportunitiesPage() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const filters = ['All', 'Open Roles', 'Projects', 'Events', 'Resources', 'Collabs'];
+  const [activeFilter, setActiveFilter] = useState('Recruitments (Coming Soon)');
+  const filters = ['Recruitments (Coming Soon)'];
+
+  const eventItems = [
+    {
+      type: 'Recruitments (Coming Soon)',
+      title: 'KIIT Nexus Core Team Recruitment 2026',
+      description: 'Join the core ecosystem developers, designers, and community managers driving innovation across the campus.',
+      date: 'TBA (To Be Announced)',
+      status: 'coming_soon',
+      tags: ['Web Dev', 'App Dev', 'Design', 'Management'],
+      icon: <FiUsers size={20} />,
+    }
+  ];
+
+  const filteredItems = eventItems.filter(item => {
+    return item.type === activeFilter;
+  });
 
   return (
     <main className="relative min-h-screen text-white overflow-x-hidden selection:bg-[#FFC20E]/30 bg-black">
       <ParticlesBackground />
+      <Navbar />
       
       {/* Content Container */}
       <div className="relative z-10 max-w-[1100px] mx-auto px-6 py-28 md:py-36 flex flex-col items-center">
@@ -128,7 +358,7 @@ export default function OpportunitiesPage() {
           >
             <div className="h-px w-8 md:w-12 bg-[#FFC20E]" />
             <span className="text-[#FFC20E] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase" style={{ fontFamily: 'monospace' }}>
-              Nexus Ecosystem
+              Events & Recruitments
             </span>
             <div className="h-px w-8 md:w-12 bg-[#FFC20E]" />
           </motion.div>
@@ -149,7 +379,7 @@ export default function OpportunitiesPage() {
           </motion.h1>
           
           <p className="text-gray-400 text-xs md:text-sm max-w-lg mb-12 leading-relaxed" style={{ fontFamily: 'monospace' }}>
-            Open roles, live projects, events, resources & more — all inside the KIIT Nexus digital ecosystem.
+            Stay updated with upcoming hackathons, tech talks, workshops, and recruitment drives inside KIIT Nexus.
           </p>
 
           {/* Filters */}
@@ -171,177 +401,82 @@ export default function OpportunitiesPage() {
           </div>
         </div>
 
-        {/* --- SECTION 1: OPEN ROLES --- */}
-        <section className="w-full border border-white/5 bg-white/[0.01] backdrop-blur-sm rounded-t-2xl p-6 md:p-8 mb-[-1px]">
-          <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-            <h2 className="text-xl md:text-2xl font-black text-white flex items-center gap-3 uppercase tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <FiUser className="text-[#FFC20E]" /> Open Roles
-            </h2>
-            <button className="text-[10px] md:text-xs text-[#FFC20E] hover:text-white font-bold tracking-widest uppercase flex items-center gap-1 transition-colors" style={{ fontFamily: 'monospace' }}>
-              View all <FiChevronRight />
-            </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {/* Role Card 1 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:border-[#FFC20E]/30 transition-all duration-300 group">
-              <div className="flex justify-between items-start mb-5">
-                <div className="p-3 bg-white/5 text-white group-hover:text-[#FFC20E] group-hover:bg-[#FFC20E]/10 transition-colors rounded-lg">
-                  <FiCode size={20} />
-                </div>
-                <span className="text-[10px] font-bold text-black bg-[#FFC20E] px-2 py-1 rounded-sm uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>Open</span>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>Frontend Developer</h3>
-              <p className="text-xs text-gray-400 mb-6 leading-relaxed" style={{ fontFamily: 'monospace' }}>Build user interfaces for Nexus internal tools and live projects.</p>
-              <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                <FiClock /> Web Dev Domain
-              </div>
-            </div>
-            {/* Role Card 2 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:border-[#FFC20E]/30 transition-all duration-300 group">
-              <div className="flex justify-between items-start mb-5">
-                <div className="p-3 bg-white/5 text-white group-hover:text-[#FFC20E] group-hover:bg-[#FFC20E]/10 transition-colors rounded-lg">
-                  <FiDatabase size={20} />
-                </div>
-                <span className="text-[10px] font-bold text-black bg-[#FFC20E] px-2 py-1 rounded-sm uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>Open</span>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>ML Engineer</h3>
-              <p className="text-xs text-gray-400 mb-6 leading-relaxed" style={{ fontFamily: 'monospace' }}>Work on AI Resume Scanner and upcoming ML projects in the Nexus lab.</p>
-              <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                <FiClock /> ML Domain
-              </div>
-            </div>
-            {/* Role Card 3 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:border-[#FFC20E]/30 transition-all duration-300 group relative overflow-hidden">
-              <div className="flex justify-between items-start mb-5 relative z-10">
-                <div className="p-3 bg-white/5 text-white group-hover:text-[#FFC20E] group-hover:bg-[#FFC20E]/10 transition-colors rounded-lg">
-                  <FiPenTool size={20} />
-                </div>
-                <span className="text-[10px] font-bold text-gray-300 border border-gray-500 px-2 py-1 rounded-sm uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>Closing</span>
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 relative z-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>Graphic Designer</h3>
-              <p className="text-xs text-gray-400 mb-6 leading-relaxed relative z-10" style={{ fontFamily: 'monospace' }}>Design creatives, banners, and branding assets for Nexus campaigns.</p>
-              <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-widest relative z-10" style={{ fontFamily: 'monospace' }}>
-                <FiClock /> Design Domain
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- SECTION 2: LIVE PROJECTS --- */}
-        <section className="w-full border border-white/5 bg-white/[0.01] backdrop-blur-sm p-6 md:p-8 mb-[-1px]">
-          <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-            <h2 className="text-xl md:text-2xl font-black text-white flex items-center gap-3 uppercase tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <FiBriefcase className="text-[#FFC20E]" /> Live Projects
-            </h2>
-            <button className="text-[10px] md:text-xs text-[#FFC20E] hover:text-white font-bold tracking-widest uppercase flex items-center gap-1 transition-colors" style={{ fontFamily: 'monospace' }}>
-              View all <FiChevronRight />
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            {/* Pitch Banner */}
-            <div className="bg-[#FFC20E]/5 border border-[#FFC20E]/30 rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFC20E]/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="p-3 bg-[#FFC20E] text-black rounded-lg shrink-0">
-                <FiZap size={24} />
-              </div>
-              <div className="relative z-10">
-                <h3 className="text-lg font-bold text-white mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Got a project idea? Pitch it to Nexus.</h3>
-                <p className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>Submit your idea and find co-builders, designers, and ML engineers from the community.</p>
-              </div>
-            </div>
-
-            {/* Project 1 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-[#FFC20E]/20 transition-all duration-300">
-              <div className="flex items-start gap-5">
-                <div className="p-3 bg-white/5 text-gray-300 rounded-lg shrink-0">
-                  <FiBox size={20} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>TestForge — Needs 2 Backend Devs</h3>
-                  <p className="text-xs text-gray-400 mb-4" style={{ fontFamily: 'monospace' }}>Real-time networking app for students. Join the CodeHunters team building on Next.js + Prisma.</p>
-                  <div className="flex flex-wrap items-center gap-5 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                    <span className="flex items-center gap-1.5"><FiUsers className="text-[#FFC20E]" /> 3 members</span>
-                    <span className="flex items-center gap-1.5"><FiCode className="text-[#FFC20E]" /> Next.js · PostgreSQL</span>
+        {/* Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mt-8">
+          {filteredItems.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1, duration: 0.6 }}
+              className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 md:p-8 hover:border-[#FFC20E]/20 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+            >
+              {item.status === 'coming_soon' && (
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFC20E]/5 rounded-full blur-2xl pointer-events-none" />
+              )}
+              
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-3 bg-white/5 text-white group-hover:text-[#FFC20E] group-hover:bg-[#FFC20E]/10 transition-colors rounded-xl">
+                    {item.icon}
                   </div>
+                  <span 
+                    className={`text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest ${
+                      item.status === 'coming_soon' 
+                        ? 'bg-neutral-800 text-gray-400 border border-white/5' 
+                        : item.status === 'register_now'
+                        ? 'bg-[#FFC20E] text-black'
+                        : 'bg-white/5 text-gray-500'
+                    }`}
+                    style={{ fontFamily: 'monospace' }}
+                  >
+                    {item.status === 'coming_soon' 
+                      ? 'Coming Soon' 
+                      : item.status === 'register_now'
+                      ? 'Register Now'
+                      : 'Completed'
+                    }
+                  </span>
                 </div>
-              </div>
-              <span className="self-start md:self-center text-[10px] font-bold text-[#FFC20E] border border-[#FFC20E]/30 px-3 py-1 rounded-sm uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>Ongoing</span>
-            </div>
 
-            {/* Project 2 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 hover:border-[#FFC20E]/20 transition-all duration-300">
-              <div className="flex items-start gap-5">
-                <div className="p-3 bg-white/5 text-gray-300 rounded-lg shrink-0">
-                  <FiFileText size={20} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>AI Resume Scanner — Needs 1 ML Dev</h3>
-                  <p className="text-xs text-gray-400 mb-4" style={{ fontFamily: 'monospace' }}>ML-powered resume analysis tool for placement prep. Built with Python + FastAPI.</p>
-                  <div className="flex flex-wrap items-center gap-5 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                    <span className="flex items-center gap-1.5"><FiUsers className="text-[#FFC20E]" /> 4 members</span>
-                    <span className="flex items-center gap-1.5"><FiCode className="text-[#FFC20E]" /> Python · TensorFlow</span>
-                  </div>
+                <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  {item.title}
+                </h3>
+                
+                <p className="text-xs md:text-sm text-gray-400 mb-6 leading-relaxed" style={{ fontFamily: 'monospace' }}>
+                  {item.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {item.tags.map((t, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 text-[9px] bg-white/[0.04] border border-white/5 text-gray-400 rounded-sm"
+                      style={{ fontFamily: 'monospace' }}
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </div>
-              <span className="self-start md:self-center text-[10px] font-bold text-[#FFC20E] border border-[#FFC20E]/30 px-3 py-1 rounded-sm uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>Ongoing</span>
-            </div>
-          </div>
-        </section>
 
-        {/* --- SECTION 3: COMMUNITY BOARD --- */}
-        <section className="w-full border border-white/5 bg-white/[0.01] backdrop-blur-sm rounded-b-2xl p-6 md:p-8">
-          <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-            <h2 className="text-xl md:text-2xl font-black text-white flex items-center gap-3 uppercase tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <FiMessageSquare className="text-[#FFC20E]" /> Community Board
-            </h2>
-            <button className="text-[10px] md:text-xs text-[#FFC20E] hover:text-white font-bold tracking-widest uppercase flex items-center gap-1 transition-colors" style={{ fontFamily: 'monospace' }}>
-              Post <FiChevronRight />
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            {/* Post 1 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-5 md:p-6 flex items-center justify-between gap-5 hover:bg-white/[0.04] transition-colors">
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-sm shrink-0">
-                  <FiUser />
+              <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
+                <div className="flex items-center gap-2 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
+                  <FiCalendar className="text-[#FFC20E]" />
+                  <span>{item.date}</span>
                 </div>
-                <div>
-                  <h3 className="text-sm md:text-base font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>Looking for a Flutter dev for my startup idea 🚀</h3>
-                  <p className="text-xs text-gray-400 mb-4" style={{ fontFamily: 'monospace' }}>Building a KIIT-specific event discovery app. Need someone with Dart experience.</p>
-                  <div className="flex flex-wrap items-center gap-5 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                    <span className="flex items-center gap-1.5"><FiUser className="text-[#FFC20E]" /> Posted by Abhishek D.</span>
-                    <span className="flex items-center gap-1.5"><FiClock className="text-[#FFC20E]" /> 2 days ago</span>
-                  </div>
-                </div>
-              </div>
-              <button className="hidden md:flex items-center gap-2 px-5 py-2 border border-white/20 hover:border-[#FFC20E] hover:text-[#FFC20E] rounded-sm text-[10px] font-bold tracking-widest uppercase text-white transition-colors" style={{ fontFamily: 'monospace' }}>
-                Reply ↗
-              </button>
-            </div>
 
-            {/* Post 2 */}
-            <div className="bg-white/[0.02] border border-white/5 rounded-xl p-5 md:p-6 flex items-center justify-between gap-5 hover:bg-white/[0.04] transition-colors">
-              <div className="flex items-start gap-5">
-                <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-sm shrink-0">
-                  <FiUser />
-                </div>
-                <div>
-                  <h3 className="text-sm md:text-base font-bold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>Internship referral — Razorpay SWE (remote)</h3>
-                  <p className="text-xs text-gray-400 mb-4" style={{ fontFamily: 'monospace' }}>Got a referral slot. DM me with your GitHub and a short intro.</p>
-                  <div className="flex flex-wrap items-center gap-5 text-[10px] text-gray-500 uppercase tracking-widest" style={{ fontFamily: 'monospace' }}>
-                    <span className="flex items-center gap-1.5"><FiUser className="text-[#FFC20E]" /> Posted by Nistha M.</span>
-                    <span className="flex items-center gap-1.5"><FiClock className="text-[#FFC20E]" /> 5 days ago</span>
-                  </div>
-                </div>
+                <button 
+                  disabled
+                  className="px-4 py-2 bg-white/5 border border-white/10 text-gray-500 text-[10px] font-bold tracking-widest uppercase rounded-sm cursor-not-allowed opacity-50"
+                  style={{ fontFamily: 'monospace' }}
+                >
+                  Register Now
+                </button>
               </div>
-              <button className="hidden md:flex items-center gap-2 px-5 py-2 border border-white/20 hover:border-[#FFC20E] hover:text-[#FFC20E] rounded-sm text-[10px] font-bold tracking-widest uppercase text-white transition-colors" style={{ fontFamily: 'monospace' }}>
-                DM ↗
-              </button>
-            </div>
-          </div>
-        </section>
+            </motion.div>
+          ))}
+        </div>
 
       </div>
     </main>

@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+
   // ── 1. DISABLE SOURCE MAPS IN PRODUCTION
   productionBrowserSourceMaps: false,
 
-  // ── 2. SECURITY HEADERS
+  // ── 2. SECURITY HEADERS (Commented out for static HTML export compatibility)
+  /*
   async headers() {
     return [
       {
@@ -38,9 +41,11 @@ const nextConfig = {
       },
     ]
   },
+  */
 
   // ── 3. IMAGE OPTIMISATION
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

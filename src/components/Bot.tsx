@@ -196,6 +196,9 @@ export default function Bot() {
             bottom:16px !important;
             right:16px !important;
           }
+          ._bot_trigger_open {
+            display: none !important;
+          }
         }
       `}</style>
 
@@ -586,7 +589,7 @@ export default function Bot() {
 
       {/* ── Trigger Button ── */}
       <button
-        className={`_bot_trigger${open ? '' : ' _bot_pulse'}`}
+        className={`_bot_trigger${open ? ' _bot_trigger_open' : ' _bot_pulse'}`}
         onClick={() => setOpen((v) => !v)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}

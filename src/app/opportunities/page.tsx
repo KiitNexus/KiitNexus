@@ -332,7 +332,7 @@ export default function OpportunitiesPage() {
       description: 'Join the core ecosystem developers, designers, and community managers driving innovation across the campus.',
       date: 'TBA (To Be Announced)',
       status: 'coming_soon',
-      tags: ['Web Dev', 'App Dev', 'Design', 'Management'],
+      tags: ['Web Dev', 'App Dev', 'Machine Learning', 'Operations', 'Marketing', 'Graphic Design', 'Video Editing'],
       icon: <FiUsers size={20} />,
     }
   ];

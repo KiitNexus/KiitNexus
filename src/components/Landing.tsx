@@ -8,7 +8,7 @@ import Glow from './Glow'
 import Contact from '@/components/Contact'
 import Link from 'next/link'
 const HERO_IMAGES = [
-  'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407136/ABHISHEK_DHAL_FOUNDER_COORDINATOR_abjldw.png',
+  // 'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407136/ABHISHEK_DHAL_FOUNDER_COORDINATOR_abjldw.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407136/ADITYA_VIKRAM_SINGH_CO-FOUNDER_it2ovu.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407141/NISTHA_MISHRA_TECHNICAL_HEAD_kfy6yp.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407146/SHIVAM_TECHNICAL_HEAD_tvgbiu.png',
@@ -815,7 +815,7 @@ const projectData = [
     link: 'https://kiit-quest-web.vercel.app/',
     logo: 'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771706066/930c0499-2516-4ad3-a9a7-a8d14a183fcb.png',
     isFeatured: true,
-    author: 'Abhishek Dhal',
+    // author: 'Abhishek Dhal',
     isTeam: false,
   },
   {

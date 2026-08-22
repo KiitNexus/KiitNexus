@@ -7,8 +7,10 @@ import { MdEmail } from 'react-icons/md'
 import Link from 'next/link'
 
 const IMAGES = {
+  /*
   founder:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407136/ABHISHEK_DHAL_FOUNDER_COORDINATOR_abjldw.png',
+  */
   cofounder:
     'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407136/ADITYA_VIKRAM_SINGH_CO-FOUNDER_it2ovu.png',
   techHead1:
@@ -70,6 +72,7 @@ const IMAGES = {
 }
 
 const founders = [
+  /*
   {
     name: 'Abhishek Dhal',
     role: 'Founder',
@@ -81,6 +84,7 @@ const founders = [
     instagram:
       'https://www.instagram.com/abhishek_dhal_2211?igsh=MTRlZzgydno3cXpxaQ%3D%3D&utm_source=qr',
   },
+  */
   {
     name: 'Aditya Vikram Singh',
     role: 'Co-Founder',
@@ -380,7 +384,7 @@ const members = [
 
 // All portrait images collected for the hero strip
 const allPortraits = [
-  IMAGES.founder,
+  // IMAGES.founder,
   IMAGES.cofounder,
   IMAGES.techHead1,
   IMAGES.techHead2,

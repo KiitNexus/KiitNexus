@@ -50,7 +50,11 @@ export default function Contact() {
     }
     setLoading(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_CONTACT_API_URL || "/api/contact";
+      const apiUrl =
+        process.env.NEXT_PUBLIC_CONTACT_API_URL ||
+        (process.env.NODE_ENV === "production"
+          ? "https://nexus-workspace-backend.vercel.app/api/contact"
+          : "http://localhost:4000/api/contact");
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -232,10 +236,10 @@ export default function Contact() {
                 <div>
                   <div className="font-medium text-white">Email</div>
                   <a
-                    href="mailto:kiitnexus.in@gmail.com"
+                    href="mailto:kiitnexus.cse@kiit.ac.in"
                     className="text-gray-300 hover:text-white transition"
                   >
-                    kiitnexus.in@gmail.com
+                    kiitnexus.cse@kiit.ac.in
                   </a>
                 </div>
               </div>

@@ -10,9 +10,31 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://kiitnexus.in",
+  "https://www.kiitnexus.in"
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+      if (!origin) return callback(null, true);
+
+      const isAllowed =
+        allowedOrigins.indexOf(origin) !== -1 ||
+        origin.startsWith("http://localhost:") ||
+        origin.startsWith("http://127.0.0.1:") ||
+        /\.vercel\.app$/.test(origin) ||
+        origin.endsWith("kiitnexus.in");
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
@@ -30,10 +52,12 @@ app.use("/api", contactRoutes);
 
 const PORT = process.env.PORT || 4000;
 
-function start() {
+// Export the Express app for Vercel Serverless Functions compatibility
+module.exports = app;
+
+// Only start the listener when running locally, not under Vercel Serverless Functions
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   });
 }
-
-start();

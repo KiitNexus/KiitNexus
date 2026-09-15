@@ -37,7 +37,11 @@ export default function AdminRecruitments() {
 
     const fetchApplications = async () => {
       try {
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+        const backendUrl =
+          process.env.NEXT_PUBLIC_BACKEND_URL ||
+          (process.env.NODE_ENV === "production"
+            ? "https://nexus-workspace-backend.vercel.app"
+            : "http://localhost:4000");
         const res = await fetch(`${backendUrl}/api/recruitments`);
         if (!res.ok) {
           throw new Error("Failed to fetch");

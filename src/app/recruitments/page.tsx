@@ -247,7 +247,11 @@ export default function RecruitmentForm() {
 
     try {
       const finalData = { ...formData, email: finalEmail };
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+      const backendUrl =
+        process.env.NEXT_PUBLIC_BACKEND_URL ||
+        (process.env.NODE_ENV === "production"
+          ? "https://nexus-workspace-backend.vercel.app"
+          : "http://localhost:4000");
       const res = await fetch(`${backendUrl}/api/recruitments/apply`, {
         method: "POST",
         headers: {

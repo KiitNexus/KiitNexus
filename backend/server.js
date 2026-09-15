@@ -3,9 +3,21 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const mongoose = require("mongoose");
 const contactRoutes = require("./routes/contact");
+const recruitmentRoutes = require("./routes/recruitment");
 
 const app = express();
+
+// Connect to MongoDB
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log("Connected to MongoDB"))
+    .catch((err) => console.error("MongoDB connection error:", err));
+} else {
+  console.warn("MONGODB_URI environment variable is missing.");
+}
+
 
 app.use(helmet());
 app.use(express.json());
@@ -49,6 +61,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use("/api", contactRoutes);
+app.use("/api/recruitments", recruitmentRoutes);
 
 const PORT = process.env.PORT || 4000;
 

@@ -1007,6 +1007,73 @@ function Projects() {
 }
 
 
+function RecruitmentPopup() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    // Slight delay before showing popup
+    const timer = setTimeout(() => setIsOpen(true), 1500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-md bg-black/90 border border-[#FFC20E]/30 p-8 rounded-2xl shadow-[0_0_40px_rgba(255,194,14,0.15)] overflow-hidden"
+          >
+            {/* Decorative background glow */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#FFC20E]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none" />
+            
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+            >
+              ✕
+            </button>
+
+            <div className="relative z-10 text-center flex flex-col items-center">
+              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-4">
+                <span className="text-xl">🚀</span>
+              </div>
+              
+              <h2 
+                className="text-2xl font-black text-white mb-2"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                RECRUITMENTS ARE <span className="text-[#FFC20E]">LIVE</span>
+              </h2>
+              
+              <p className="text-gray-400 text-sm mb-6 leading-relaxed" style={{ fontFamily: 'monospace' }}>
+                The wait is over! Join the core team of KIIT Nexus and build the future of campus innovation.
+              </p>
+              
+              <Link
+                href="/recruitments"
+                className="w-full relative overflow-hidden group bg-[#FFC20E] text-black font-bold text-sm tracking-widest uppercase px-6 py-3.5 rounded-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(255,194,14,0.3)]"
+                style={{ fontFamily: 'monospace' }}
+              >
+                <span className="relative z-10">Register Now ➔</span>
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 export default function Landing() {
   const [index, setIndex] = useState(0)
 
@@ -1019,6 +1086,7 @@ export default function Landing() {
 
   return (
     <div className="bg-black text-white selection:bg-[#FFC20E]/30">
+      <RecruitmentPopup />
       <ParticlesBackground />
       <Glow />
       <Navbar />

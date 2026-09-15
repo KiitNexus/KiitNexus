@@ -322,16 +322,16 @@ function ParticlesBackground() {
 
 // --- MAIN PAGE COMPONENT ---
 export default function OpportunitiesPage() {
-  const [activeFilter, setActiveFilter] = useState('Recruitments (Coming Soon)');
-  const filters = ['Recruitments (Coming Soon)'];
+  const [activeFilter, setActiveFilter] = useState('Recruitments (Live)');
+  const filters = ['Recruitments (Live)'];
 
   const eventItems = [
     {
-      type: 'Recruitments (Coming Soon)',
+      type: 'Recruitments (Live)',
       title: 'KIIT Nexus Core Team Recruitment 2026',
       description: 'Join the core ecosystem developers, designers, and community managers driving innovation across the campus.',
-      date: 'TBA (To Be Announced)',
-      status: 'coming_soon',
+      date: '26th - 27th Sept (Campus 25)',
+      status: 'register_now',
       tags: ['Web Dev', 'App Dev', 'Machine Learning', 'Operations', 'Marketing', 'Graphic Design', 'Video Editing'],
       icon: <FiUsers size={20} />,
     }
@@ -425,7 +425,7 @@ export default function OpportunitiesPage() {
                       item.status === 'coming_soon' 
                         ? 'bg-neutral-800 text-gray-400 border border-white/5' 
                         : item.status === 'register_now'
-                        ? 'bg-[#FFC20E] text-black'
+                        ? 'bg-[#FFC20E] text-black shadow-[0_0_10px_rgba(255,194,14,0.4)]'
                         : 'bg-white/5 text-gray-500'
                     }`}
                     style={{ fontFamily: 'monospace' }}
@@ -433,7 +433,7 @@ export default function OpportunitiesPage() {
                     {item.status === 'coming_soon' 
                       ? 'Coming Soon' 
                       : item.status === 'register_now'
-                      ? 'Register Now'
+                      ? 'Live Now'
                       : 'Completed'
                     }
                   </span>
@@ -466,13 +466,23 @@ export default function OpportunitiesPage() {
                   <span>{item.date}</span>
                 </div>
 
-                <button 
-                  disabled
-                  className="px-4 py-2 bg-white/5 border border-white/10 text-gray-500 text-[10px] font-bold tracking-widest uppercase rounded-sm cursor-not-allowed opacity-50"
-                  style={{ fontFamily: 'monospace' }}
-                >
-                  Register Now
-                </button>
+                {item.status === 'register_now' ? (
+                  <Link 
+                    href="/recruitments"
+                    className="px-4 py-2 bg-[#FFC20E] text-black text-[10px] font-bold tracking-widest uppercase rounded-sm hover:scale-105 transition-transform shadow-[0_0_15px_rgba(255,194,14,0.3)]"
+                    style={{ fontFamily: 'monospace' }}
+                  >
+                    Apply Now
+                  </Link>
+                ) : (
+                  <button 
+                    disabled
+                    className="px-4 py-2 bg-white/5 border border-white/10 text-gray-500 text-[10px] font-bold tracking-widest uppercase rounded-sm cursor-not-allowed opacity-50"
+                    style={{ fontFamily: 'monospace' }}
+                  >
+                    Register Now
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}

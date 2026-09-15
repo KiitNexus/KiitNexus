@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const recruitmentSchema = new mongoose.Schema({
   name: {
@@ -11,7 +11,11 @@ const recruitmentSchema = new mongoose.Schema({
     required: true,
     trim: true,
     lowercase: true,
-    match: [/^[a-zA-Z0-9._%+-]+@kiit\.ac\.in$/, 'Please fill a valid KIIT email address (@kiit.ac.in)'],
+    unique: true, // enforce "one application per email" atomically at the DB level
+    match: [
+      /^[a-zA-Z0-9._%+-]+@kiit\.ac\.in$/,
+      'Please fill a valid KIIT email address (@kiit.ac.in)',
+    ],
   },
   whatsapp: {
     type: String,
@@ -51,8 +55,12 @@ const recruitmentSchema = new mongoose.Schema({
   appliedAt: {
     type: Date,
     default: Date.now,
+    index: true, // speeds up the .sort({ appliedAt: -1 }) on the admin GET
   },
-});
+})
 
-module.exports = mongoose.model('Recruitment', recruitmentSchema, 'RECRUITMENT PHASE 1');
-
+module.exports = mongoose.model(
+  'Recruitment',
+  recruitmentSchema,
+  'RECRUITMENT PHASE 1',
+)

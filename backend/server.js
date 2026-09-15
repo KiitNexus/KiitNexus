@@ -1,76 +1,103 @@
-require("dotenv").config();
-const express = require("express");
-const helmet = require("helmet");
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
-const mongoose = require("mongoose");
-const contactRoutes = require("./routes/contact");
-const recruitmentRoutes = require("./routes/recruitment");
+require('dotenv').config()
+const express = require('express')
+const helmet = require('helmet')
+const cors = require('cors')
+const rateLimit = require('express-rate-limit')
+const mongoose = require('mongoose')
+const contactRoutes = require('./routes/contact')
+const recruitmentRoutes = require('./routes/recruitment')
 
-const app = express();
+const app = express()
 
-// Connect to MongoDB
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("MongoDB connection error:", err));
-} else {
-  console.warn("MONGODB_URI environment variable is missing.");
+// Vercel sits in front of this app as a proxy — without this,
+// express-rate-limit throws on the X-Forwarded-For header under load.
+app.set('trust proxy', 1)
+
+mongoose.set('bufferCommands', false)
+
+let connecting = null
+function connectDB() {
+  if (mongoose.connection.readyState === 1) return Promise.resolve()
+  if (!process.env.MONGODB_URI) {
+    console.error('MONGODB_URI environment variable is missing.')
+    return Promise.resolve()
+  }
+  if (!connecting) {
+    connecting = mongoose
+      .connect(process.env.MONGODB_URI, {
+        maxPoolSize: 20,
+        minPoolSize: 5,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 20000,
+      })
+      .then(() => console.log('Connected to MongoDB'))
+      .catch((err) => {
+        console.error('MongoDB connection error:', err)
+        connecting = null // allow retry on next request
+      })
+  }
+  return connecting
 }
+connectDB()
 
-
-app.use(helmet());
-app.use(express.json());
+app.use(helmet())
+app.use(express.json())
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://kiitnexus.in",
-  "https://www.kiitnexus.in"
-];
+  'http://localhost:3000',
+  'https://kiitnexus.in',
+  'https://www.kiitnexus.in',
+]
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, or server-to-server)
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true)
 
       const isAllowed =
         allowedOrigins.indexOf(origin) !== -1 ||
-        origin.startsWith("http://localhost:") ||
-        origin.startsWith("http://127.0.0.1:") ||
+        origin.startsWith('http://localhost:') ||
+        origin.startsWith('http://127.0.0.1:') ||
         /\.vercel\.app$/.test(origin) ||
-        origin.endsWith("kiitnexus.in");
+        origin.endsWith('kiitnexus.in')
 
       if (isAllowed) {
-        callback(null, true);
+        callback(null, true)
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error('Not allowed by CORS'))
       }
     },
     credentials: true,
   }),
-);
+)
 
-// Basic rate limiting to prevent spam
+// Rate limiting — safe now that trust proxy is set. Bumped headroom
+// slightly since this fires per-IP across many students at once.
 const limiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 20,
-  message: { error: "Too many requests, please try again later." },
-});
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later.' },
+})
 
-app.use(limiter);
+app.use(limiter)
 
-app.use("/api", contactRoutes);
-app.use("/api/recruitments", recruitmentRoutes);
+// Attempt reconnect on the way in, per-request, cheaply (no-op once connected).
+app.use((req, res, next) => {
+  connectDB()
+  next()
+})
 
-const PORT = process.env.PORT || 4000;
+app.use('/api', contactRoutes)
+app.use('/api/recruitments', recruitmentRoutes)
 
-// Export the Express app for Vercel Serverless Functions compatibility
-module.exports = app;
+const PORT = process.env.PORT || 4000
 
-// Only start the listener when running locally, not under Vercel Serverless Functions
-if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+module.exports = app
+
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
+    console.log(`Server listening on port ${PORT}`)
+  })
 }

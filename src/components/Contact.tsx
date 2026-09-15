@@ -53,7 +53,7 @@ export default function Contact() {
       const apiUrl =
         process.env.NEXT_PUBLIC_CONTACT_API_URL ||
         (process.env.NODE_ENV === "production"
-          ? "https://nexus-workspace-backend.vercel.app/api/contact"
+          ? "https://backend.kiitnexus.in/api/contact"
           : "http://localhost:4000/api/contact");
       const res = await fetch(apiUrl, {
         method: "POST",

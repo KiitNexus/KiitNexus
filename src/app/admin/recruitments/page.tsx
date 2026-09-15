@@ -40,7 +40,7 @@ export default function AdminRecruitments() {
         const backendUrl =
           process.env.NEXT_PUBLIC_BACKEND_URL ||
           (process.env.NODE_ENV === "production"
-            ? "https://nexus-workspace-backend.vercel.app"
+            ? "https://backend.kiitnexus.in"
             : "http://localhost:4000");
         const res = await fetch(`${backendUrl}/api/recruitments`);
         if (!res.ok) {

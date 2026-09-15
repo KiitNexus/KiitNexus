@@ -87,7 +87,7 @@ async function sendRecruitmentConfirmation({
                   
                   <!-- HEADER WITH BACKGROUND IMAGE -->
                   <tr>
-                    <td background="https://res.cloudinary.com/da9zvp0mu/image/upload/v1789420345/71841b60-dbbd-44dd-961e-1e124d85c81c.png" style="background-image: url('https://res.cloudinary.com/da9zvp0mu/image/upload/v1789420345/71841b60-dbbd-44dd-961e-1e124d85c81c.png'); background-size: cover; background-position: center; border-bottom: 3px solid #ff0055; padding: 40px 20px; text-align: center;">
+                    <td background="https://res.cloudinary.com/da9zvp0mu/image/upload/v1789446435/f01c1747-54ec-4d9a-869b-b64b9900ebef.png" style="background-image: url('https://res.cloudinary.com/da9zvp0mu/image/upload/v1789446435/f01c1747-54ec-4d9a-869b-b64b9900ebef.png'); background-size: cover; background-position: center; border-bottom: 3px solid #ff0055; padding: 40px 20px; text-align: center;">
                       
                       <!-- LOGOS -->
                       <div style="margin-bottom: 15px;">

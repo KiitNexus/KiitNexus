@@ -17,7 +17,6 @@ const HERO_IMAGES = [
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407138/ANANYA_RAJ_LEAD_APP_DEV_FLUTTER_dhsacs.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407138/ANURAG_MUKHERJEE_LEAD_APP_DEV_ANDROID_vex2is.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407147/SHRIDIPA_DHAR_LEAD_ML_t6kwms.png',
-  'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771408451/ARYAN_KUMAR_LEAD_OPERATIONS_obmshf.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407143/OWAIS_LEAD_GRAPHIC_DESIGNING_k9rl0p.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771407145/SAYAN_BARMAN_LEAD_BROADCASTING_auk8zp.png',
   'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771408453/IPSIT_DAS_LEAD_MARKETING_mpoklh.png',
@@ -186,8 +185,8 @@ function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         className={`fixed top-0 left-0 right-0 z-50 hidden md:flex items-center justify-between px-6 lg:px-10 transition-all duration-700 ${scrolled
-            ? 'py-4 bg-black/85 backdrop-blur-2xl border-b border-[#FFC20E]/10'
-            : 'py-7 bg-transparent'
+          ? 'py-4 bg-black/85 backdrop-blur-2xl border-b border-[#FFC20E]/10'
+          : 'py-7 bg-transparent'
           }`}
       >
         {/* LOGO */}
@@ -205,7 +204,7 @@ function Navbar() {
               className="h-8 lg:h-10 w-auto object-contain"
             />
           </a>
-          
+
           <div className="h-6 w-px bg-white/20" />
 
           {/* KIIT Nexus Logo */}
@@ -243,8 +242,8 @@ function Navbar() {
                 key={link.id}
                 href={`/${link.id}`}
                 className={`relative px-3 lg:px-5 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 rounded-full border ${activeLink === link.id
-                    ? 'text-[#FFC20E] bg-white/5 border-[#FFC20E]/30 shadow-[0_0_15px_rgba(255,194,14,0.15)]'
-                    : 'text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
+                  ? 'text-[#FFC20E] bg-white/5 border-[#FFC20E]/30 shadow-[0_0_15px_rgba(255,194,14,0.15)]'
+                  : 'text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
                   }`}
                 style={{ fontFamily: 'monospace' }}
               >
@@ -258,8 +257,8 @@ function Navbar() {
                   setActiveLink(link.id)
                 }}
                 className={`relative px-3 lg:px-5 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 rounded-full border ${activeLink === link.id
-                    ? 'text-[#FFC20E] bg-white/5 border-[#FFC20E]/30 shadow-[0_0_15px_rgba(255,194,14,0.15)]'
-                    : 'text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
+                  ? 'text-[#FFC20E] bg-white/5 border-[#FFC20E]/30 shadow-[0_0_15px_rgba(255,194,14,0.15)]'
+                  : 'text-gray-400 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
                   }`}
                 style={{ fontFamily: 'monospace' }}
               >
@@ -303,7 +302,7 @@ function Navbar() {
               className="h-7 w-auto object-contain"
             />
           </a>
-          
+
           <div className="h-5 w-px bg-white/20" />
 
           {/* KIIT Nexus Logo Mobile */}
@@ -903,7 +902,7 @@ function Projects() {
               }`}
           >
             {project.isFeatured && (
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#FFC20E]/15 rounded-full blur-3xl" />
+              <div className="absolute -top-24 -right-24 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(255,194,14,0.1) 0%, transparent 70%)' }} />
             )}
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex justify-between items-start mb-6">
@@ -927,8 +926,8 @@ function Projects() {
                 )}
                 <span
                   className={`px-3 py-1 text-[10px] font-bold tracking-widest uppercase rounded-sm border ${project.status === 'Live'
-                      ? 'bg-[#FFC20E] text-black border-[#FFC20E]'
-                      : 'bg-white/5 text-gray-500 border-white/5'
+                    ? 'bg-[#FFC20E] text-black border-[#FFC20E]'
+                    : 'bg-white/5 text-gray-500 border-white/5'
                     }`}
                   style={{ fontFamily: 'monospace' }}
                 >
@@ -1033,9 +1032,9 @@ function RecruitmentPopup() {
             className="relative w-full max-w-md bg-black/90 border border-[#FFC20E]/30 p-8 rounded-2xl shadow-[0_0_40px_rgba(255,194,14,0.15)] overflow-hidden"
           >
             {/* Decorative background glow */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#FFC20E]/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none" />
-            
+            <div className="absolute -top-20 -right-20 w-40 h-40 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(255,194,14,0.15) 0%, transparent 70%)' }} />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%)' }} />
+
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
@@ -1044,21 +1043,37 @@ function RecruitmentPopup() {
             </button>
 
             <div className="relative z-10 text-center flex flex-col items-center">
-              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-4">
-                <span className="text-xl">🚀</span>
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <img
+                  src="/KIIT_LOGO.webp"
+                  alt="KIIT University"
+                  className="h-10 w-auto object-contain"
+                />
+                <div className="h-8 w-px bg-white/20" />
+                <div className="flex items-center gap-2">
+                  <img
+                    src="https://res.cloudinary.com/da9zvp0mu/image/upload/v1771705575/WhatsApp_Image_2026-02-22_at_1.46.53_AM-removebg-preview_rcftja.png"
+                    alt="KIIT Nexus"
+                    className="h-10 w-auto object-contain drop-shadow-[0_0_8px_rgba(255,194,14,0.6)]"
+                  />
+                  <div className="flex flex-col leading-none text-left">
+                    <span className="text-[#FFC20E] font-black text-sm tracking-[0.2em]" style={{ fontFamily: 'monospace' }}>KIIT</span>
+                    <span className="text-white font-black text-sm tracking-[0.2em]" style={{ fontFamily: 'monospace' }}>NEXUS</span>
+                  </div>
+                </div>
               </div>
-              
-              <h2 
+
+              <h2
                 className="text-2xl font-black text-white mb-2"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 RECRUITMENTS ARE <span className="text-[#FFC20E]">LIVE</span>
               </h2>
-              
+
               <p className="text-gray-400 text-sm mb-6 leading-relaxed" style={{ fontFamily: 'monospace' }}>
                 The wait is over! Join the core team of KIIT Nexus and build the future of campus innovation.
               </p>
-              
+
               <Link
                 href="/recruitments"
                 className="w-full relative overflow-hidden group bg-[#FFC20E] text-black font-bold text-sm tracking-widest uppercase px-6 py-3.5 rounded-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(255,194,14,0.3)]"

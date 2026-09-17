@@ -92,6 +92,9 @@ app.use((req, res, next) => {
 app.use('/api', contactRoutes)
 app.use('/api/recruitments', recruitmentRoutes)
 
+// Keep-alive ping route to prevent server sleep
+app.get('/ping', (req, res) => res.status(200).send('OK'))
+
 const PORT = process.env.PORT || 4000
 
 module.exports = app

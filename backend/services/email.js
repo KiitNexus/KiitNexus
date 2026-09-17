@@ -15,8 +15,8 @@ const transporter = nodemailer.createTransport({
 
 async function sendContactEmail({ name, email, subject, message }) {
   const mailOptions = {
-    from: process.env.SMTP_USER,
-    to: process.env.CONTACT_RECEIVER,
+    from: 'kiitnexus.cse@kiit.ac.in',
+    to: 'kiitnexus.in@gmail.com',
     replyTo: email,
     subject: `New Contact Form Submission — KIIT Nexus`,
     html: `

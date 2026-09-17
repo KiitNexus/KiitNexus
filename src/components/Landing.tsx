@@ -814,7 +814,7 @@ const projectData = [
     link: 'https://kiit-quest-web.vercel.app/',
     logo: 'https://res.cloudinary.com/da9zvp0mu/image/upload/v1771706066/930c0499-2516-4ad3-a9a7-a8d14a183fcb.png',
     isFeatured: true,
-    // author: 'Abhishek Dhal',
+    author: 'Abhishek Dhal',
     isTeam: false,
   },
   {

@@ -825,7 +825,7 @@ const projectData = [
     status: 'Live',
     link: 'https://play.google.com/store/apps/details?id=com.anuragapps.fitmate',
     logo: '/fitmate.jpg',
-    author: 'FitMate Team',
+    author: 'Anurag Mukherjee, Astha Kashyap',
     isTeam: true,
   },
   {
@@ -836,8 +836,8 @@ const projectData = [
     status: 'Live',
     link: 'https://study-orbit-taupe.vercel.app',
     logo: '/studyorbit.png',
-    author: 'StudyOrbit Team',
-    isTeam: true,
+    author: 'Chandan Kumar',
+    isTeam: false,
   },
 ]
 

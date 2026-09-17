@@ -371,13 +371,13 @@ const coreProjects = [
     status: 'Live',
     link: 'https://play.google.com/store/apps/details?id=com.anuragapps.fitmate',
     logo: '/fitmate.jpg',
-    author: 'FitMate Team',
+    author: 'Anurag Mukherjee, Astha Kashyap',
     isTeam: true,
     deadline: null,
     githubLink: null,
     documentationLink: null,
     deployedLink: 'https://play.google.com/store/apps/details?id=com.anuragapps.fitmate',
-    teamMembers: [{ name: 'FitMate Team' }],
+    teamMembers: [{ name: 'Anurag Mukherjee' }, { name: 'Astha Kashyap' }],
   },
   {
     title: 'StudyOrbit',
@@ -388,13 +388,13 @@ const coreProjects = [
     status: 'Live',
     link: 'https://study-orbit-taupe.vercel.app',
     logo: '/studyorbit.png',
-    author: 'StudyOrbit Team',
-    isTeam: true,
+    author: 'Chandan Kumar',
+    isTeam: false,
     deadline: null,
     githubLink: null,
     documentationLink: null,
     deployedLink: 'https://study-orbit-taupe.vercel.app',
-    teamMembers: [{ name: 'StudyOrbit Team' }],
+    teamMembers: [{ name: 'Chandan Kumar' }],
   }
 ]
 

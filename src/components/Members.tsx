@@ -350,6 +350,15 @@ const members = [
     instagram: 'https://www.instagram.com/_anweee_?igsh=amh6dzU5eTNjdGJ4&utm_source=qr',
   },
   {
+    name: 'Akshat Aryan',
+    role: 'Broadcasting',
+    img: IMAGES.member14,
+    linkedin: 'https://www.linkedin.com/in/akshat-aryan-?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    github: '#',
+    mail: 'akshataryanp@gmail.com ',
+    instagram: 'https://www.instagram.com/akxh.t_?igsh=OW1ucnFnOGNwZmlj',
+  },
+  {
     name: 'Abhishek Kumar',
     role: 'Broadcasting',
     img: IMAGES.member15,
@@ -395,6 +404,7 @@ const allPortraits = [
   IMAGES.member8,
   IMAGES.member12,
   IMAGES.member13,
+  IMAGES.member14,
   IMAGES.member15,
   IMAGES.member16,
 ]

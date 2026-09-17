@@ -533,7 +533,7 @@ function Hero({ imgIndex }: { imgIndex: number }) {
             className="text-[#FFC20E] text-[10px] md:text-xs font-bold tracking-[0.25em] md:tracking-[0.35em] uppercase"
             style={{ fontFamily: 'monospace' }}
           >
-            KIIT University · Est. 2024
+            KIIT NEXUS · Est. 2026
           </span>
         </motion.div>
 
@@ -630,7 +630,7 @@ function Hero({ imgIndex }: { imgIndex: number }) {
           </div>
 
           {/* LIVE DOT */}
-          <div className="flex items-center gap-2 sm:ml-auto">
+          {/* <div className="flex items-center gap-2 sm:ml-auto">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFC20E] opacity-60" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FFC20E]" />
@@ -641,7 +641,7 @@ function Hero({ imgIndex }: { imgIndex: number }) {
             >
               System Online
             </span>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* SCROLL INDICATOR — desktop only */}
